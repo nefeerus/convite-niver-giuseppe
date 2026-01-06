@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Café da Manhã de Aniversário – Giuseppe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonte gamer -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -11,7 +11,8 @@
   <style>
     :root {
       --bg: #12153a;
-      --card: #1f2460;
+      --cardTop: #2a2f6a;
+      --cardBottom: #14173a;
       --yellow: #f5e642;
       --cyan: #57e6ff;
       --pink: #ff5fa2;
@@ -39,7 +40,7 @@
       position: relative;
       max-width: 420px;
       width: 100%;
-      background: radial-gradient(circle at top, #2a2f6a, #14173a);
+      background: radial-gradient(circle at top, var(--cardTop), var(--cardBottom));
       border: 4px solid var(--yellow);
       border-radius: 16px;
       padding: 24px;
@@ -83,6 +84,7 @@
       color: var(--yellow);
       font-size: 18px;
       margin: 24px 0;
+      line-height: 1.4;
     }
 
     .highlight {
@@ -146,13 +148,13 @@
 
 <body>
 
-  <!-- ÁUDIO (correto para navegadores modernos) -->
-  <audio id="bgm" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b2c1b2c8e.mp3?filename=8-bit-platformer-loop-110624.mp3" type="audio/mpeg">
+  <!-- ÁUDIO LOCAL (FUNCIONA EM TODOS OS NAVEGADORES) -->
+  <audio id="bgm" preload="auto" playsinline>
+    <source src="assets/bgm.mp3" type="audio/mpeg">
   </audio>
 
   <div class="card">
-    <button class="sound-btn" id="soundBtn">🔊 SOM</button>
+    <button class="sound-btn" id="soundBtn">▶ SOM</button>
 
     <div class="label">JOGADOR</div>
     <div class="value">GIUSEPPE</div>
@@ -198,7 +200,6 @@
   <script>
     const audio = document.getElementById('bgm');
     const soundBtn = document.getElementById('soundBtn');
-
     let tocando = false;
 
     soundBtn.addEventListener('click', () => {
@@ -206,27 +207,34 @@
         audio.volume = 0.4;
         audio.loop = true;
         audio.play();
-        soundBtn.textContent = '🔈 SOM';
+        soundBtn.textContent = '⏸ SOM';
         tocando = true;
       } else {
         audio.pause();
-        soundBtn.textContent = '🔊 SOM';
+        soundBtn.textContent = '▶ SOM';
         tocando = false;
       }
     });
 
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
       e.preventDefault();
+
       const nome = document.getElementById('nome').value;
       const presenca = document.getElementById('presenca').value;
 
       const numero = '(21)98196-7724'; // ex: 5521999999999
       const msg = `Olá! ${nome} aqui 😊 ${presenca} no seu café da manhã de aniversário!`;
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
 
-      window.open(url, '_blank');
+      window.open(
+        `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`,
+        '_blank'
+      );
     });
   </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
