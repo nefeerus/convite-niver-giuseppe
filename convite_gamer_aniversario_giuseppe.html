@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café da Manhã de Aniversário – Giuseppe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1b1f4b;
+      --yellow: #f5e642;
+      --white: #ffffff;
+      --pink: #ff5fa2;
+      --cyan: #57e6ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background:
+        radial-gradient(#ffffff33 1px, transparent 1px),
+        radial-gradient(#ffffff22 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px, 80px 80px, cover;
+      background-position: 0 0, 20px 20px, center;
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      max-width: 420px;
+      width: 100%;
+      background: radial-gradient(circle at top, #2a2f6a, #14173a);
+      border: 4px solid var(--yellow);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    .pixel {
+      display: inline-block;
+      animation: blink 1.8s steps(2) infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .label { color: var(--yellow); font-size: 10px; margin-top: 16px; }
+    .value { font-size: 14px; margin-top: 6px; }
+
+    h1 { color: var(--yellow); font-size: 18px; margin: 24px 0; }
+    .highlight { color: var(--cyan); }
+
+    .footer { font-size: 9px; margin-top: 16px; line-height: 1.6; }
+
+    .rsvp { margin-top: 16px; padding: 12px; border: 2px dashed var(--pink); border-radius: 10px; color: var(--pink); font-size: 10px; }
+
+    form { margin-top: 16px; }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 12px;
+      width: 100%;
+      background: var(--yellow);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    button:hover { filter: brightness(1.1); }
+
+    iframe {
+      margin-top: 16px;
+      width: 100%;
+      height: 180px;
+      border: 2px solid var(--cyan);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b2c1b2c8e.mp3?filename=8-bit-platformer-loop-110624.mp3" type="audio/mpeg">
+  </audio>
+  <div class="card">
+    <div class="label">JOGADOR</div>
+    <div class="value">GIUSEPPE</div>
+
+    <div class="label">SUBINDO DE NÍVEL PARA</div>
+    <div class="value highlight">+34 <span class="pixel">★</span></div>
+
+    <h1>CAFÉ DA MANHÃ<br>DE ANIVERSÁRIO</h1>
+
+    <div class="label">DATA</div>
+    <div class="value">DOMINGO • 18 DE JANEIRO</div>
+
+    <div class="label">HORÁRIO</div>
+    <div class="value">8H ÀS 11H30</div>
+
+    <div class="label">LOCAL</div>
+    <div class="value">SÍTIO TANGARÁ • PRATA</div>
+
+    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=S%C3%ADtio+Tangar%C3%A1+Teres%C3%B3polis+RJ&output=embed">
+    </iframe>
+
+    <div class="footer">
+      Será uma alegria receber você<br>para celebrar este momento.
+    </div>
+
+    <div class="rsvp">CONFIRMAÇÃO DE PRESENÇA</div>
+
+    <form onsubmit="enviarWhats(event)">
+      <input type="text" id="nome" placeholder="SEU NOME" required />
+      <select id="presenca" required>
+        <option value="">VAI COMPARECER?</option>
+        <option value="Confirmo presença">Confirmo presença</option>
+        <option value="Não poderei comparecer">Não poderei comparecer</option>
+      </select>
+      <button type="submit">ENVIAR CONFIRMAÇÃO</button>
+    </form>
+  </div>
+
+  <script>
+    function enviarWhats(e) {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const presenca = document.getElementById('presenca').value;
+      const numero = 'SEU_NUMERO_AQUI'; // ex: 5521999999999
+      const msg = `Olá! ${nome} aqui 😊 ${presenca} no seu café da manhã de aniversário!`;
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
